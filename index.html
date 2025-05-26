@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自己概念 • Autoconcepto y Autoestima</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #010A26;
+            --primary: #406973;
+            --secondary: #163C40;
+            --light: #F0F2F1;
+            --accent: #BF967E;
+            --japanese-red: #E60012;
+        }
+
+        @font-face {
+            font-family: 'Noto Sans JP';
+            src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&display=swap');
+        }
+
+        body {
+            font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--bg-dark);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        /* Elementos decorativos japoneses */
+        .japanese-pattern {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                repeating-linear-gradient(
+                    90deg,
+                    var(--secondary),
+                    var(--secondary) 1px,
+                    transparent 1px,
+                    transparent 40px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    var(--secondary),
+                    var(--secondary) 1px,
+                    transparent 1px,
+                    transparent 40px
+                );
+        }
+
+        /* Hero section estilo japonés */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--light) 0%, #e8eae9 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 200%;
+            background: var(--accent);
+            opacity: 0.1;
+            transform: rotate(25deg);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .japanese-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            color: var(--bg-dark);
+            margin-bottom: 10px;
+            letter-spacing: -3px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .japanese-title::after {
+            content: '自己概念';
+            position: absolute;
+            top: -30px;
+            right: -40px;
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 300;
+            opacity: 0.6;
+            writing-mode: vertical-rl;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 300;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .author-name {
+            font-size: 1rem;
+            color: var(--accent);
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+
+        /* Botón scroll japonés */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid var(--bg-dark);
+            border-radius: 15px;
+            cursor: pointer;
+            z-index: 3;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            width: 4px;
+            height: 10px;
+            background: var(--bg-dark);
+            border-radius: 2px;
+            transform: translateX(-50%);
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+            100% { transform: translateX(-50%) translateY(20px); opacity: 0; }
+        }
+
+        /* Sección principal con diseño asimétrico */
+        .main-section {
+            position: relative;
+            padding: 100px 0 1500px 0;
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Silueta central estilo origami */
+        .central-figure {
+            position: relative;
+            width: 400px;
+            height: 600px;
+            margin: 100px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .origami-human {
+            position: relative;
+            width: 200px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            clip-path: polygon(
+                50% 0%, 65% 10%, 70% 20%, 65% 30%, 
+                70% 40%, 60% 50%, 65% 60%, 70% 70%, 
+                75% 85%, 65% 95%, 55% 100%, 45% 100%, 
+                35% 95%, 25% 85%, 30% 70%, 35% 60%, 
+                40% 50%, 30% 40%, 35% 30%, 30% 20%, 
+                35% 10%
+            );
+            box-shadow: 0 20px 40px rgba(1, 10, 38, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Agregar un pequeño texto explicativo */
+        .origami-human::after {
+            content: 'Silueta Origami';
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: var(--primary);
+            opacity: 0.5;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Cards estilo japonés moderno */
+        .concepts-container {
+            position: relative;
+            margin-top: -500px;
+            margin-bottom: 100px;
+        }
+
+        .concept-card {
+            position: absolute;
+            background: white;
+            border-radius: 0;
+            padding: 40px;
+            width: 320px;
+            box-shadow: 0 10px 40px rgba(1, 10, 38, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            overflow: hidden;
+            border-left: 3px solid transparent;
+        }
+
+        .concept-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, var(--accent) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(1, 10, 38, 0.15);
+            border-left-color: var(--accent);
+        }
+
+        /* Modal overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(1, 10, 38, 0.9);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Card en modo modal */
+        .concept-card.modal-active {
+            position: fixed !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) scale(1.5) !important;
+            width: 600px !important;
+            max-width: 90vw !important;
+            z-index: 1000 !important;
+            box-shadow: 0 50px 100px rgba(0, 0, 0, 0.5) !important;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        /* Botón cerrar */
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: var(--secondary);
+            transform: rotate(90deg);
+        }
+
+        .concept-card.modal-active .close-modal {
+            display: flex;
+        }
+
+        .concept-card:hover::before {
+            opacity: 0.03;
+        }
+
+        .concept-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent);
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .concept-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .concept-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--bg-dark);
+            letter-spacing: -0.5px;
+            transition: font-size 0.4s ease;
+        }
+
+        .concept-card:hover h3 {
+            font-size: 1.4rem;
+        }
+
+        .concept-card .japanese-label {
+            font-size: 0.8rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            transition: font-size 0.4s ease;
+        }
+
+        .concept-card:hover .japanese-label {
+            font-size: 0.9rem;
+        }
+
+        .concept-card p {
+            color: var(--primary);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            font-weight: 300;
+            transition: font-size 0.4s ease;
+        }
+
+        .concept-card:hover p {
+            font-size: 1rem;
+            line-height: 2;
+        }
+
+        /* Posicionamiento asimétrico de cards */
+        .card-1 { top: 0; left: 10%; }
+        .card-2 { top: 80px; right: 10%; }
+        .card-3 { top: 200px; left: 5%; }
+        .card-4 { top: 320px; right: 15%; }
+        .card-5 { top: 480px; left: 12%; }
+        .card-6 { top: 560px; right: 8%; }
+        .card-7 { top: 720px; left: 8%; }
+        .card-8 { top: 800px; right: 12%; }
+        .card-9 { top: 960px; left: 15%; }
+        .card-10 { top: 1040px; right: 5%; }
+        .card-11 { top: 1200px; left: 50%; transform: translateX(-50%); }
+
+        /* Sección de reflexión estilo zen */
+        .reflection-section {
+            position: relative;
+            padding: 150px 0;
+            background: var(--bg-dark);
+            color: var(--light);
+            overflow: hidden;
+        }
+
+        .reflection-section::before {
+            content: '内省';
+            position: absolute;
+            top: 50%;
+            left: -100px;
+            font-size: 15rem;
+            font-weight: 900;
+            color: var(--secondary);
+            opacity: 0.05;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        .reflection-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .reflection-title {
+            font-size: 3rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+        }
+
+        .reflection-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        /* Animaciones de entrada */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive con enfoque móvil */
+        @media (max-width: 1200px) {
+            .concepts-container {
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .concept-card {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                right: auto !important;
+                transform: none !important;
+                width: 100%;
+                max-width: 500px;
+            }
+
+            .central-figure {
+                margin: 50px auto;
+            }
+        }
+
+        /* Decoración circular japonesa */
+        .decoration-circle {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            opacity: 0.1;
+            pointer-events: none;
+            animation: rotate 30s linear infinite;
+        }
+
+        .decoration-circle:nth-child(1) {
+            top: -150px;
+            right: -150px;
+        }
+
+        .decoration-circle:nth-child(2) {
+            bottom: -150px;
+            left: -150px;
+            animation-direction: reverse;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="japanese-pattern"></div>
+    <div class="decoration-circle"></div>
+    <div class="decoration-circle"></div>
+    
+    <!-- Hover Overlay para efecto automático -->
+    <div class="hover-overlay"></div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="japanese-title fade-in">AUTOCONCEPTO</h1>
+            <p class="subtitle fade-in" style="animation-delay: 0.2s">Una reflexión sobre mi identidad y evolución personal</p>
+            <p class="author-name fade-in" style="animation-delay: 0.4s">Brayan Stivens Sepúlveda Molina</p>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-section">
+        <div class="container">
+            <div class="central-figure">
+                <div class="origami-human"></div>
+            </div>
+
+            <div class="concepts-container">
+                <div class="concept-card card-1 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">01</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">身体的側面</div>
+                        <h3>Aspecto Físico</h3>
+                        <p>Me considero de estatura promedio, algo bajo. Últimamente con algo de sobrepeso pero trabajando en mejorarlo. Me gusta cuidar mi cabello y mantener un aspecto varonil con toques metrosexuales.</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+
+                <div class="concept-card card-2 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">02</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">人間関係</div>
+                        <h3>Relación con los Demás</h3>
+                        <p>Siempre dispuesto a ayudar y alegrar el día de otros. Me gusta estar cerca de las personas que amo y conocer nuevas mentes, nuevos mundos. Disfruto las conexiones genuinas.</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+
+                <div class="concept-card card-3 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">03</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">人格</div>
+                        <h3>Personalidad</h3>
+                        <p>Algo mal geniado cuando llego a mi límite. No me gusta el desorden y prefiero que vayan al grano. Siempre alegre, me gusta ayudar, relacionarme y aprender de todos.</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+
+                <div class="concept-card card-4 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">04</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">他者の視点</div>
+                        <h3>Cómo me Ven los Demás</h3>
+                        <p>Como una persona alegre e inteligente que siempre tiene tema de conversación. Responsable y constantemente estudiando. Alguien en quien se puede confiar para proyectos importantes.</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+
+                <div class="concept-card card-5 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">05</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">仕事の成果</div>
+                        <h3>Rendimiento Laboral/Académico</h3>
+                        <p>Me gusta ser responsable y trabajar en equipo. Busco crecimiento diario y siempre doy un extra en lo que hago. Como desarrollador semi-senior en DevSecOps, combino pasión y profesionalismo.</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+
+                <div class="concept-card card-6 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">06</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">日常業務</div>
+                        <h3>Tareas Diarias</h3>
+                        <p>Bastante burocrático, por así decirlo. Me gusta hacer todo lo que me propongo y tengo pensado en el día. La organización y estructura son fundamentales en mi rutina.</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+
+                <div class="concept-card card-7 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">07</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">論理的思考</div>
+                        <h3>Razonamiento y Resolución</h3>
+                        <p>Me gusta llevar los problemas a varios niveles de abstracción, encontrar la solución más rápida, óptima y eficaz, y prepararme para posibles mejoras futuras.</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+
+                <div class="concept-card card-8 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">08</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">学習能力</div>
+                        <h3>Capacidad de Aprendizaje</h3>
+                        <p>Cuando un tema me interesa, le dedico el 100%. Esto me ayuda a comprender rápidamente. Si no es rápido, busco por todos lados hasta entender y quedar satisfecho.</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+
+                <div class="concept-card card-9 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">09</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">創造性</div>
+                        <h3>Creación e Innovación</h3>
+                        <p>Siempre quiero hacer algo diferente que destaque. No me conformo con lo mínimo, especialmente cuando es algo de mi interés. La innovación es mi motor de crecimiento.</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+
+                <div class="concept-card card-10 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">10</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">文化的理解</div>
+                        <h3>Entendimiento Cultural</h3>
+                        <p>Me gusta entender mi entorno: la cultura donde estoy, qué mejoras son posibles, por qué somos así, de dónde vengo, por qué tengo ciertos comportamientos. ¿Es por dónde crecí?</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+
+                <div class="concept-card card-11 fade-in">
+                    <button class="close-modal">×</button>
+                    <div class="concept-number">11</div>
+                    <div class="concept-content">
+                        <div class="japanese-label">個人的側面</div>
+                        <h3>Percepción Sexual</h3>
+                        <p>Área personal que mantengo en privacidad, considerando que forma parte integral de mi desarrollo como persona, pero no es algo que defina mi identidad profesional.</p>
+                    </div>
+                </div>
+                <div class="hover-overlay"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reflection Section -->
+    <section class="reflection-section">
+        <div class="reflection-content">
+            <h2 class="reflection-title fade-in">Reflexión Final</h2>
+            <p class="reflection-text fade-in" style="animation-delay: 0.2s">
+                Este autoconcepto refleja mi identidad como desarrollador de software en constante evolución. 
+                Mi aspiración es crear mi propia empresa de desarrollo enfocada en soluciones tecnológicas seguras, 
+                combinando mi pasión por el desarrollo y la ciberseguridad. Busco estabilidad financiera para mí y mis seres queridos, 
+                manteniendo siempre una mentalidad de aprendizaje y crecimiento. Soy una persona que valora el orden y la responsabilidad, 
+                pero que no teme salir de su zona de confort para crecer personal y profesionalmente.
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scroll mejorado
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            const mainSection = document.querySelector('.main-section');
+            mainSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        // Animación de entrada al hacer scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.concept-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Parallax effect sutil - deshabilitado temporalmente para evitar problemas
+        /* window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.origami-human');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        }); */
+
+        /* Hover 3D effect mejorado con expansión */
+        document.querySelectorAll('.concept-card').forEach(card => {
+            card.addEventListener('mouseenter', (e) => {
+                // Traer la card al frente
+                card.style.zIndex = '1000';
+                
+                // Guardar la posición original
+                if (!card.dataset.originalPosition) {
+                    const rect = card.getBoundingClientRect();
+                    card.dataset.originalPosition = JSON.stringify({
+                        left: card.style.left,
+                        top: card.style.top,
+                        right: card.style.right,
+                        transform: card.style.transform
+                    });
+                }
+            });
+            
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 30;
+                const rotateY = (centerX - x) / 30;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-20px) scale(1.15)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+                
+                // Restaurar z-index con un pequeño retraso
+                setTimeout(() => {
+                    card.style.zIndex = '';
+                }, 400);
+            });
+        });
+    </script>
+</body>
+</html>
